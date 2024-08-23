@@ -1,0 +1,190 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #283694;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+.menu-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+.menu-item {
+    flex-basis: calc(28.333% - 02px);
+    /* 3 items per row, accounting for gap */
+    background-color: rgba(255, 255, 255, 0.2);
+    /* Transparent white */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    /* Apply blur effect */
+    -webkit-backdrop-filter: blur(10px);
+    /* Safari support */
+    -moz-backdrop-filter: blur(10px);
+    /* Firefox support */
+    -o-backdrop-filter: blur(10px);
+    /* Opera support */
+    -ms-backdrop-filter: blur(10px);
+    /* Internet Explorer 10+ support */
+    overflow: hidden;
+    width: 370px;
+    margin: 15px;
+    height: 280px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 10px;
+
+}
+
+.menu-item img {
+    width: 100%;
+    height: auto;
+}
+
+.menu-item h2 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.menu-item p {
+    padding-left: 20px;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.price {
+    font-size: 1.2rem;
+    color: #12843a;
+    margin: 15px 0;
+    font-weight: bolder;
+    margin-right: 30px;
+}
+
+.add-to-cart {
+    background-color: #283694;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-left: 45px;
+    margin-top: 10px;
+    box-shadow: 0 13px 15px rgba(28, 27, 27, 0.203);
+}
+
+.add-to-cart:hover {
+    background-color: #1e7227;
+
+}
+
+.cart {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 12px 12px 15px rgba(79, 78, 78, 0.1);
+    width: 400px;
+}
+
+/* Specific selector for .menu-item .veg to increase specificity */
+.menu-item img.veg {
+    width: 15px;
+    /* Adjust the width */
+    height: 15px;
+    /* Adjust the height */
+    display: flex;
+    vertical-align: baseline;
+    margin-left: 5px;
+
+}
+
+/* Ensure the .item-img class is applied correctly */
+.menu-item .item-img {
+    width: 100%;
+    /* Adjust the width to the desired percentage or pixel value */
+    max-width: 380px;
+    /* Maximum width, adjust as needed */
+    height: 45%;
+    /* Adjust height automatically to maintain aspect ratio */
+    object-fit: cover;
+    /* Ensures the image covers the area while maintaining aspect ratio */
+    border-radius: 5px;
+    /* Optional: rounded corners */
+    /* Optional: space below the image */
+}
+
+/*portable size web and mobile */
+
+@media (max-width: 768px) {
+    .menu-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-item {
+        width: 80%;
+    }
+
+    .cart {
+        width: 90%;
+    }
+}
+
+.quantity-controls {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column; /* Stack the buttons vertically */
+    align-items: center; /* Center align the buttons horizontally */
+    gap: 10px; /* Space between the increase and decrease buttons */
+}
+
+
+/*shopping card + and - button*/
+
+.increase-quantity,
+.decrease-quantity {
+    background-color: #199e26;
+    color: white;
+    border: 1px solid #f3b627;
+    padding: 9px 9px;
+    border-radius: 100%;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    max-width: 50px;
+    max-height: 50px;
+    
+    
+    
+}
+
+.decrease-quantity {
+    background-color: red;
+    padding: 9px 10px;
+}
+
+.increase-quantity:hover {
+    background-color: #1e7227;
+}
+
+

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiosk Menu</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let total = 0;
+            const cartItems = {};
+
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const totalDisplay = document.getElementById('total');
+            const cartItemsDisplay = document.getElementById('cart-items');
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const itemName = button.getAttribute('data-name');
+                    const itemPrice = parseInt(button.getAttribute('data-price'));
+
+                    // If item is already in the cart, increase its quantity
+                    if (cartItems[itemName]) {
+                        cartItems[itemName].quantity += 1;
+                    } else {
+                        // Otherwise, add the item to the cart with quantity 1
+                        cartItems[itemName] = {
+                            price: itemPrice,
+                            quantity: 1
+                        };
+                    }
+
+                    total += itemPrice;
+                    totalDisplay.textContent = total;
+                    updateCartDisplay();
+                });
+            });
+
+            function updateCartDisplay() {
+                cartItemsDisplay.innerHTML = '';
+                for (const [itemName, itemDetails] of Object.entries(cartItems)) {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                ${itemName}  | ₹${itemDetails.price} x ${itemDetails.quantity} = ₹${itemDetails.price * itemDetails.quantity}
+                <button class="increase-quantity" data-name="${itemName}">+</button>
+                <button class="decrease-quantity" data-name="${itemName}">-</button>
+            `;
+                    cartItemsDisplay.appendChild(li);
+                }
+
+                // Add event listeners for the increase and decrease buttons
+                const increaseButtons = document.querySelectorAll('.increase-quantity');
+                const decreaseButtons = document.querySelectorAll('.decrease-quantity');
+
+                increaseButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const itemName = button.getAttribute('data-name');
+                        cartItems[itemName].quantity += 1;
+                        total += cartItems[itemName].price;
+                        totalDisplay.textContent = total;
+                        updateCartDisplay();
+                    });
+                });
+
+                decreaseButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const itemName = button.getAttribute('data-name');
+                        if (cartItems[itemName].quantity > 1) {
+                            cartItems[itemName].quantity -= 1;
+                            total -= cartItems[itemName].price;
+                        } else {
+                            total -= cartItems[itemName].price;
+                            delete cartItems[itemName];
+                        }
+                        totalDisplay.textContent = total;
+                        updateCartDisplay();
+                    });
+                });
+            }
+        });
+
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Orcas | Menu</h1>
+    </header>
+
+    <div class="menu-container">
+        <div class="menu-item">
+            <img class="item-img" src="pos/2.png" alt="pretty Rose Milk" sizes="height=12px">
+            <h3>pretty Rose Milk</h3>
+            <img class="veg" src="pos/51RNAbFiV8L._SX679_.jpg" alt="" sizes="">
+            <p>rich in flavour rose syrup,condensed milk and fresh streamed Milk .</p>
+            <br>
+            <hr>
+            <span class="price">₹60</span>
+            <button class="add-to-cart" data-name="pretty Rose Milk" data-price="60">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+            <img class="item-img" src="pos/3.png" alt="Ancient Badam shake" sizes="height=12px">
+            <h3>Ancient Badam shake</h3>
+            <img class="veg" src="pos/51RNAbFiV8L._SX679_.jpg" alt="veg" sizes="" srcset="">
+            <p>high nutrients badam , cashew nut, cardamon and condensed milk.</p>
+            <br>
+            <hr>
+            <span class="price">₹60</span>
+            <button class="add-to-cart" data-name="Ancient Badam shake" data-price="69.5">Add to Cart</button>
+        </div>
+
+        <div class="menu-item">
+            <img class="item-img" src="pos/4.png" alt="Double chocolate milkshake" sizes="height=12px">
+            <h3>Double chocolate milkshake</h3>
+            <img class="veg" src="pos/51RNAbFiV8L._SX679_.jpg" alt="veg" sizes="" srcset="">
+            <p>choco powder and syrup ,rich in texture and chill milk over ice .</p>
+            <br>
+            <hr>
+            <span class="price">₹60</span>
+            <button class="add-to-cart" data-name="Double chocolate milkshake" data-price="69">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+            <img class="item-img" src="pos/5.png" alt="Vanilla sky" sizes="height=12px">
+            <h3>Vanilla sky</h3>
+            <img class="veg" src="/pos/51RNAbFiV8L._SX679_.jpg" alt="veg">
+            <p class="veges">rich in vanilla syrup and ice cream and fresh streamed milk with ice cube.</p>
+            <br>
+            <hr>
+            <span class="price">₹60</span>
+            <button class="add-to-cart" data-name="Vanilla sky" data-price="79">Add to Cart</button>
+        </div>
+        <!-- Add more menu items as needed -->
+    </div>
+<!-- shopping card  -->
+    <div class="cart">
+        <h2>Shopping Cart</h2>
+        <br>
+        <hr>
+
+        <ul id="cart-items" style="font-size: 0.em; font: width 1px;"></ul>
+        <p style="margin-left: 22px; font-weight: bolder;">Total: ₹<span id="total">0</span></p>
+        <hr>
+        <p style="font-weight: bold; margin-top: 12px;">THANKYOU</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
